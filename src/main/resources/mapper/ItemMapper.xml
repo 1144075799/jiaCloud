@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiacloud.api.dao.ItemMapper">
+    <resultMap id="BaseResultMap" type="com.jiacloud.api.domain.Item">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="site" property="site"/>
+        <result column="title" property="title"/>
+        <result column="time" property="time"/>
+        <result column="participants" property="participants"/>
+        <result column="particulars" property="particulars"/>
+        <result column="sponsor" property="sponsor"/>
+        <result column="deadline" property="deadline"/>
+        <result column="alias" property="alias"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,site,title,time,participants,particulars,sponsor,deadline,alias
+    </sql>
+
+    <!--添加项目-->
+    <select id="addItem" resultMap="BaseResultMap" parameterType="java.lang.String">
+        INSERT INTO activity (name,site,title,time,participants,particulars,sponsor,deadline,alias) VALUES (#{name},#{site},#{title},#{time},#{participants},#{particulars},#{sponsor},#{deadline},#{alias})
+    </select>
+
+    <!--查找项目-->
+    <select id="findItem" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from activity
+        where name = #{name}
+    </select>
+
+    <!--查找所有的项目-->
+    <select id="findAllItem" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from activity
+    </select>
+</mapper>

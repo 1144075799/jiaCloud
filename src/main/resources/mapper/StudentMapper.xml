@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiacloud.api.dao.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.jiacloud.api.domain.Student">
+        <id column="id" property="id"/>
+        <result column="userName" property="userName"/>
+        <result column="passWord" property="passWord"/>
+        <result column="name" property="name"/>
+        <result column="number" property="number"/>
+        <result column="classroom" property="classroom"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userName,passWord,name,number,clasroom
+    </sql>
+
+    <!--添加学生信息-->
+    <select id="addStudent" resultMap="BaseResultMap" parameterType="java.lang.String">
+        INSERT INTO student (userName,passWord,name,number,classroom) VALUES (#{userName},#{passWord},#{name},#{number},#{classroom})
+    </select>
+
+    <!--查找学生信息-->
+    <select id="findStudent" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        name,number,classroom
+        from student
+        where name=#{name}
+    </select>
+
+    <!--检验密码-->
+    <select id="checkStudent" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        passWord
+        from student
+        where userName=#{userName}
+    </select>
+
+    <!--查找基本信息-->
+    <select id="findBaseStudent" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        name,number,classroom
+        from student
+        where userName=#{userName}
+    </select>
+
+    <!--查找所有学生-->
+    <select id="findAllStudent" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        id,name,number,classroom
+        from student
+    </select>
+
+    <!--删除指定学生-->
+    <select id="deleteStudent" resultMap="BaseResultMap" parameterType="java.lang.String">
+        delete
+        from student
+        where name=#{name}
+    </select>
+
+    <!--修改学生基本信息-->
+    <select id="alterStudent" resultMap="BaseResultMap" parameterType="java.lang.String">
+        update student
+        set name=#{name},number=#{number},classroom=#{classroom}
+        where id=#{id}
+    </select>
+</mapper>

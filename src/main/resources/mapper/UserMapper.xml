@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiacloud.api.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.jiacloud.api.domain.User">
+        <id column="id" property="id"/>
+        <result column="userName" property="userName"/>
+        <result column="passWord" property="passWord"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        id,userName,passWord,type
+    </sql>
+
+    <!--添加用户信息-->
+    <select id="addUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+        INSERT INTO user (userName,passWord,type) VALUES (#{userName},#{passWord},#{type})
+    </select>
+
+    <!--查找用户信息-->
+    <select id="extractUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where userName = #{userName}
+    </select>
+    
+</mapper>
