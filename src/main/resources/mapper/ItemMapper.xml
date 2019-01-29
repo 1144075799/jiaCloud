@@ -37,4 +37,12 @@
         <include refid="Base_Column_List" />
         from activity
     </select>
+
+    <!--查找活动名称-->
+    <select id="findItemName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          name
+        from activity
+        where  alias = #{alias}
+    </select>
 </mapper>

@@ -29,4 +29,10 @@ public class ItemServiceImpl implements ItemMapper{
     public List<Item> findAllItem(){
         return itemMapper.findAllItem();
     }
+
+    /**查找活动名称**/
+    @Override
+    public Item findItemName(String alias){
+        return itemMapper.findItemName(alias);
+    }
 }

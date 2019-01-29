@@ -5,6 +5,8 @@ import com.jiacloud.api.domain.CampusActivity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CampusActivityServiceImpl implements CampusActivityMapper {
     @Autowired
@@ -13,5 +15,15 @@ public class CampusActivityServiceImpl implements CampusActivityMapper {
     /**创建校园活动表**/
     public CampusActivity setActivity(String bdname){
         return campusActivityMapper.setActivity(bdname);
+    }
+
+    /**参加校园活动**/
+    public CampusActivity joinActivity(String bdname,String classroom,String name,String number){
+        return campusActivityMapper.joinActivity(bdname,classroom,name,number);
+    }
+
+    /**返回所有参加人的信息**/
+    public List<CampusActivity> findAllActivity(String bdname){
+        return campusActivityMapper.findAllActivity(bdname);
     }
 }

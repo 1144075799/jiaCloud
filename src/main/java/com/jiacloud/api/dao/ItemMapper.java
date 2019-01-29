@@ -37,5 +37,13 @@ public interface ItemMapper {
     List<Item> findAllItem();
 
 
+    /**
+     * 查找活动名称
+     * @param alias
+     * @return
+     */
+    Item findItemName(String alias);
+
+
 
 }
