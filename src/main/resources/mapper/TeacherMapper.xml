@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiacloud.api.dao.TeacherMapper">
+    <resultMap id="BaseResultMap" type="com.jiacloud.api.domain.Teacher">
+        <id column="id" property="id"/>
+        <result column="userName" property="userName"/>
+        <result column="passWord" property="passWord"/>
+        <result column="type" property="type"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <!--添加老师信息-->
+    <select id="addTeacher" resultMap="BaseResultMap" parameterType="java.lang.String">
+        INSERT INTO teacher (userName,passWord,type,name) VALUES (#{userName},#{passWord},#{type},#{name})
+    </select>
+
+    <!--查找老师-->
+    <select id="findTeacher" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          username
+        from teacher
+        where name=#{name}
+    </select>
+
+    <!--查找对应老师的密码-->
+    <select id="checkTeacher" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          passWord
+        from teacher
+        where userName=#{userName}
+    </select>
+
+    <!--查找基本信息-->
+    <select id="findBaseTeacher" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          type,name
+        from teacher
+        where userName=#{userName}
+    </select>
+</mapper>
