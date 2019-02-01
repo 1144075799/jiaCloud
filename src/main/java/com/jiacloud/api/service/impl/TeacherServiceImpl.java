@@ -5,6 +5,8 @@ import com.jiacloud.api.domain.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeacherServiceImpl implements TeacherMapper {
     @Autowired
@@ -28,5 +30,10 @@ public class TeacherServiceImpl implements TeacherMapper {
     @Override
     public Teacher findBaseTeacher(String userName){
         return teacherMapper.findBaseTeacher(userName);
+    }
+
+    @Override
+    public List<Teacher> findAllTeacher(){
+        return teacherMapper.findAllTeacher();
     }
 }

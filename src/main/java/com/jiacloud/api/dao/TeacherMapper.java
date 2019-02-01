@@ -4,6 +4,8 @@ import com.jiacloud.api.domain.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface TeacherMapper {
     /**
@@ -36,5 +38,11 @@ public interface TeacherMapper {
      * @return
      */
     Teacher findBaseTeacher(String userName);
+
+    /**
+     * 查找所有的管理员
+     * @return
+     */
+    List<Teacher> findAllTeacher();
 
 }

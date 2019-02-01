@@ -37,4 +37,11 @@
         from teacher
         where userName=#{userName}
     </select>
+
+    <!--返回所有老师信息-->
+    <select id="findAllTeacher" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        userName,name,type
+        from teacher
+    </select>
 </mapper>

@@ -6,6 +6,8 @@ import com.jiacloud.api.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class TeacherController {
     @Autowired
@@ -15,12 +17,12 @@ public class TeacherController {
     @RequestMapping(value = "/teacherRegister",method = RequestMethod.POST)
     public Teacher studentRegister(@RequestBody Teacher teacher){
         /**打印前端参数**/
-//        System.out.println(teacher.getUserName());
+        System.out.println(teacher.getUserName());
 
         /**获取前端参数**/
         String userName=teacher.getUserName();
         String passWord=teacher.getUserName();
-        String type=teacher.getType();
+        String type="0";
         String name=teacher.getName();
 
         /**对密码进行加密处理**/
@@ -48,7 +50,7 @@ public class TeacherController {
         return teacher;
     }
 
-    /**学生登录处理**/
+    /**老师登录处理**/
     @CrossOrigin
     @RequestMapping(value = "/teacherLogin",method = RequestMethod.POST)
     public Teacher studentLogin(@RequestBody Teacher teacher){
@@ -87,5 +89,13 @@ public class TeacherController {
             return teacher;
         }
 
+    }
+
+    /**查找所有老师**/
+    @CrossOrigin
+    @RequestMapping(value = "/teacherGather",method = RequestMethod.GET)
+    public List<Teacher> studentGather(){
+        List<Teacher> teacher=teacherService.findAllTeacher();
+        return teacher;
     }
 }
