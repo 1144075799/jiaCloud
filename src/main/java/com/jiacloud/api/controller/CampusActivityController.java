@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.spi.FileSystemProvider;
+import java.security.Timestamp;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,6 +25,7 @@ public class CampusActivityController {
     private CampusActivityServiceImpl campusActivityService;
     @Autowired
     private ItemServiceImpl itemService;
+
 
     String dbName=null;
 
@@ -38,7 +43,42 @@ public class CampusActivityController {
         String name=campusActivity.getName();
         String number=campusActivity.getNumber();
 
+
+        /**判断是否已经超时**/
+
+        /**获取截至时间**/
+        String activityName=itemService.findItemName(dbname).getName();
+        String activityDeadline=itemService.findItem(activityName).getDeadline();
+        System.out.println(activityDeadline);
+        /**获取当前的时间**/
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
+        String currentTime=sdf.format(d);
+
+        /**判断是否已经超时**/
+        if(currentTime.compareTo(activityDeadline)>0){
+            campusActivity.setCode(401);
+            return campusActivity;
+        }
+
+        /**判断人数是否已经满了**/
+            /**预定人数**/
+            String Participants=itemService.findItemParticipants(dbname).getParticipants();
+            int Participant=Integer.parseInt(Participants);
+            /**当前人数**/
+            int numberOfpeople=campusActivityService.countUpActivity(dbname);
+
+            if(numberOfpeople>=Participant){
+                /**如果人数已经满了 则返回值为400**/
+                campusActivity.setCode(400);
+                return campusActivity;
+            }
+
+
+
         campusActivityService.joinActivity(dbname,classroom,name,number);
+
+        campusActivity.setCode(200);
 
         return campusActivity;
     }

@@ -34,4 +34,10 @@
           classroom,name,number
         from ${bdname}
     </select>
+
+    <!--返回参与人数-->
+    <select id="countUpActivity" resultType="java.lang.Integer">
+        select count(*)
+        from ${bdname}
+    </select>
 </mapper>

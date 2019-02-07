@@ -3,7 +3,7 @@
 <mapper namespace="com.jiacloud.api.dao.ImageMapper">
 
 
-    <select id="addImagePath" parameterType="java.lang.String">
+<select id="addImagePath" parameterType="java.lang.String">
         INSERT INTO image (imgPath) VALUES (#{ImgPath})
     </select>
 

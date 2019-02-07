@@ -35,4 +35,10 @@ public class ItemServiceImpl implements ItemMapper{
     public Item findItemName(String alias){
         return itemMapper.findItemName(alias);
     }
+
+    /**查找活动预定人数**/
+    @Override
+    public Item findItemParticipants(String alias){
+        return itemMapper.findItemParticipants(alias);
+    }
 }

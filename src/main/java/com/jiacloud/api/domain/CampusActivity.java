@@ -3,6 +3,8 @@ package com.jiacloud.api.domain;
 public class CampusActivity {
     private  String bdname;
 
+    private int code;
+
     private String classroom;
 
     private String name;
@@ -39,6 +41,14 @@ public class CampusActivity {
 
     public void setBdname(String bdname) {
         this.bdname = bdname;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
 

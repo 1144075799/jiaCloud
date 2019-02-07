@@ -10,7 +10,7 @@
         <result column="participants" property="participants"/>
         <result column="particulars" property="particulars"/>
         <result column="sponsor" property="sponsor"/>
-        <result column="deadline" property="deadline"/>
+        <result column="deadline" property="deadline" jdbcType="DATE"/>
         <result column="alias" property="alias"/>
     </resultMap>
 
@@ -42,6 +42,14 @@
     <select id="findItemName" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
           name
+        from activity
+        where  alias = #{alias}
+    </select>
+
+    <!--查找活动名称-->
+    <select id="findItemParticipants" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          participants
         from activity
         where  alias = #{alias}
     </select>

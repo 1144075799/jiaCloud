@@ -2,14 +2,21 @@ package com.jiacloud.api.controller;
 
 import com.jiacloud.api.domain.Item;
 import com.jiacloud.api.service.impl.CampusActivityServiceImpl;
+import com.jiacloud.api.service.impl.DocServiceImpl;
 import com.jiacloud.api.service.impl.ItemServiceImpl;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ItemController {
@@ -17,6 +24,10 @@ public class ItemController {
     private ItemServiceImpl itemService;
     @Autowired
     private CampusActivityServiceImpl campusActivityService;
+    @Autowired
+    private DocServiceImpl docService;
+
+    String alias=null;
 
     /**发布项目**/
     @CrossOrigin
@@ -35,7 +46,7 @@ public class ItemController {
         String particulars=item.getParticulars();
         String sponsor=item.getSponsor();
         String deadline=item.getDeadline();
-        String alias=item.getAlias();
+        alias=item.getAlias();
 
         /**判断数据库钟是否已存在这个活动**/
         String checkTitle=null;
@@ -67,6 +78,45 @@ public class ItemController {
     public List<Item> getActivity(){
         List<Item> item=itemService.findAllItem();
         return item;
+    }
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/uploadDoc", method = RequestMethod.POST)
+    /**项目文件上传类**/
+    public String uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
+
+        //设置文件的保存路径
+        String path = "E:\\Spring\\data\\doc\\";
+        System.out.println(path);
+
+        //文件命名
+        String originalFilename = file.getOriginalFilename();
+        System.out.println(originalFilename);
+        String extendName = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length());
+
+        //判断文件是否是文档
+        Map<String, String> map = new HashMap<>();
+        String[] imagType = {".doc",".docx"};
+        List<String> imageTyepLists = Arrays.asList(imagType);
+        if (imageTyepLists.contains(extendName)) {
+            File dir = new File(path, originalFilename);
+            //并接图片路径
+            String DocPath=path+originalFilename;
+            File filepath = new File(path);
+            //创建存放图片的文件夹
+            if (!filepath.exists()) {
+                filepath.mkdirs();
+            }
+            //把图片放进文件夹中
+            file.transferTo(dir);
+
+            //把文档的路径写入数据库
+            docService.addDocPath(originalFilename,alias);
+
+            return "200";
+        }
+        return "400";
     }
 
     /**生成excel**/

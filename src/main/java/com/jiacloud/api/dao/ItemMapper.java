@@ -44,6 +44,13 @@ public interface ItemMapper {
      */
     Item findItemName(String alias);
 
+    /**
+     * 查找活动预定人数
+     * @param alias
+     * @return
+     */
+    Item findItemParticipants(String alias);
+
 
 
 }

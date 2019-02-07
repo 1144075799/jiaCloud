@@ -26,4 +26,10 @@ public class CampusActivityServiceImpl implements CampusActivityMapper {
     public List<CampusActivity> findAllActivity(String bdname){
         return campusActivityMapper.findAllActivity(bdname);
     }
+
+    /**统计参与人数**/
+    public Integer  countUpActivity(String bdname){
+        Integer numberOfpeople=campusActivityMapper.countUpActivity(bdname);
+        return numberOfpeople;
+    }
 }
