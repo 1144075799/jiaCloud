@@ -14,8 +14,8 @@ public class ItemServiceImpl implements ItemMapper{
 
     /**发布项目**/
     @Override
-    public Item addItem(String name,String site,String title,String time,String participants,String particulars,String sponsor,String deadline,String alias){
-        return itemMapper.addItem(name,site,title,time,participants,particulars,sponsor,deadline,alias);
+    public Item addItem(String name,String site,String title,String time,String participants,String particulars,String sponsor,String deadline){
+        return itemMapper.addItem(name,site,title,time,participants,particulars,sponsor,deadline);
     }
 
     /**查找项目**/
@@ -30,15 +30,15 @@ public class ItemServiceImpl implements ItemMapper{
         return itemMapper.findAllItem();
     }
 
-    /**查找活动名称**/
-    @Override
-    public Item findItemName(String alias){
-        return itemMapper.findItemName(alias);
-    }
 
     /**查找活动预定人数**/
     @Override
-    public Item findItemParticipants(String alias){
-        return itemMapper.findItemParticipants(alias);
+    public Item findItemParticipants(String name){
+        return itemMapper.findItemParticipants(name);
+    }
+
+    @Override
+    public String addDocName(String DocName,String name){
+        return itemMapper.addDocName(DocName,name);
     }
 }

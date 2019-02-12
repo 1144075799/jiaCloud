@@ -27,7 +27,7 @@ public class ItemController {
     @Autowired
     private DocServiceImpl docService;
 
-    String alias=null;
+    String name=null;
 
     /**发布项目**/
     @CrossOrigin
@@ -36,9 +36,9 @@ public class ItemController {
         /**打印从前端收取的数据(测试用)**/
 //        System.out.println(item.getName());
 //        System.out.println(item.getSite());
-//        System.out.println(item.getAlias());    //打印别名
+
         /**获取前端传递的值**/
-        String name=item.getName();
+        name=item.getName();
         String site=item.getSite();
         String title=item.getTitle();
         String time=item.getTime();
@@ -46,7 +46,6 @@ public class ItemController {
         String particulars=item.getParticulars();
         String sponsor=item.getSponsor();
         String deadline=item.getDeadline();
-        alias=item.getAlias();
 
         /**判断数据库钟是否已存在这个活动**/
         String checkTitle=null;
@@ -62,10 +61,8 @@ public class ItemController {
         }
 
         /**插入数据库**/
-        itemService.addItem(name,site,title,time,participants,particulars,sponsor,deadline,alias);
+        itemService.addItem(name,site,title,time,participants,particulars,sponsor,deadline);
 
-        /**创建校园活动表**/
-        campusActivityService.setActivity(alias);
 
         /**返回请求号**/
         item.setCode(200);
@@ -88,7 +85,7 @@ public class ItemController {
 
         //设置文件的保存路径
         String path = "E:\\Spring\\data\\doc\\";
-        System.out.println(path);
+//        System.out.println(path);
 
         //文件命名
         String originalFilename = file.getOriginalFilename();
@@ -101,8 +98,8 @@ public class ItemController {
         List<String> imageTyepLists = Arrays.asList(imagType);
         if (imageTyepLists.contains(extendName)) {
             File dir = new File(path, originalFilename);
-            //并接图片路径
-            String DocPath=path+originalFilename;
+//            //并接图片路径
+//            String DocPath=path+originalFilename;
             File filepath = new File(path);
             //创建存放图片的文件夹
             if (!filepath.exists()) {
@@ -112,7 +109,8 @@ public class ItemController {
             file.transferTo(dir);
 
             //把文档的路径写入数据库
-            docService.addDocPath(originalFilename,alias);
+//            docService.addDocPath(originalFilename,name);
+            itemService.addDocName(originalFilename,name);
 
             return "200";
         }

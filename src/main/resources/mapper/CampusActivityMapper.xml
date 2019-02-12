@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jiacloud.api.dao.CampusActivityMapper">
     <resultMap id="BaseResultMap" type="com.jiacloud.api.domain.CampusActivity">
-        <result column="bdname" property="bdname"/>
+        <result column="activityName" property="activityName"/>
         <result column="classroom" property="classroom"/>
         <result column="name" property="name"/>
         <result column="number" property="number"/>
@@ -12,32 +12,24 @@
         id,classroom,name.number
     </sql>
 
-    <!--创建活动表-->
-    <select id="setActivity" parameterType="java.lang.String">
-        create table ${bdname}(
-          id int(10) NOT NULL AUTO_INCREMENT,
-          classroom varchar(255) DEFAULT NULL COMMENT '班级',
-          name varchar(255) DEFAULT NULL COMMENT '名字',
-          number varchar(255) DEFAULT NULL COMMENT '学号',
-          PRIMARY KEY (`id`)
-        )ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-    </select>
 
     <!--参加校园活动-->
     <select id="joinActivity" parameterType="java.lang.String">
-        INSERT INTO ${bdname} (classroom,name,number) VALUES (#{classroom},#{name},#{number})
+        INSERT INTO activitymember (classroom,name,number,activityName) VALUES (#{classroom},#{name},#{number},#{activityName})
     </select>
 
     <!--返回所有参加人的信息-->
     <select id="findAllActivity" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
           classroom,name,number
-        from ${bdname}
+        from activitymember
+        where activityName=#{activityName}
     </select>
 
     <!--返回参与人数-->
     <select id="countUpActivity" resultType="java.lang.Integer">
         select count(*)
-        from ${bdname}
+        from activitymember
+        where activityName=#{activityName}
     </select>
 </mapper>

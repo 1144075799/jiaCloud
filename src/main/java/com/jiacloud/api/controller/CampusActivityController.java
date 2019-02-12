@@ -27,7 +27,7 @@ public class CampusActivityController {
     private ItemServiceImpl itemService;
 
 
-    String dbName=null;
+    String activityName=null;
 
     /**参加活动**/
     @CrossOrigin
@@ -38,7 +38,7 @@ public class CampusActivityController {
 //        System.out.println(campusActivity.getClassroom());
 
         /**接受参数**/
-        String dbname=campusActivity.getBdname();
+        String activityName=campusActivity.getActivityName();
         String classroom=campusActivity.getClassroom();
         String name=campusActivity.getName();
         String number=campusActivity.getNumber();
@@ -47,13 +47,14 @@ public class CampusActivityController {
         /**判断是否已经超时**/
 
         /**获取截至时间**/
-        String activityName=itemService.findItemName(dbname).getName();
         String activityDeadline=itemService.findItem(activityName).getDeadline();
         System.out.println(activityDeadline);
         /**获取当前的时间**/
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
         String currentTime=sdf.format(d);
+
+        System.out.println(currentTime);
 
         /**判断是否已经超时**/
         if(currentTime.compareTo(activityDeadline)>0){
@@ -63,10 +64,13 @@ public class CampusActivityController {
 
         /**判断人数是否已经满了**/
             /**预定人数**/
-            String Participants=itemService.findItemParticipants(dbname).getParticipants();
+            String Participants=itemService.findItemParticipants(activityName).getParticipants();
             int Participant=Integer.parseInt(Participants);
+            System.out.println("预定人数:"+Participant);
             /**当前人数**/
-            int numberOfpeople=campusActivityService.countUpActivity(dbname);
+            int numberOfpeople=campusActivityService.countUpActivity(activityName);
+
+            System.out.println(numberOfpeople);
 
             if(numberOfpeople>=Participant){
                 /**如果人数已经满了 则返回值为400**/
@@ -76,7 +80,7 @@ public class CampusActivityController {
 
 
 
-        campusActivityService.joinActivity(dbname,classroom,name,number);
+        campusActivityService.joinActivity(activityName,classroom,name,number);
 
         campusActivity.setCode(200);
 
@@ -87,10 +91,10 @@ public class CampusActivityController {
     @RequestMapping(value = "/findActivity",method = RequestMethod.POST)
     public List<CampusActivity> findActivity(@RequestBody CampusActivity campusActivity){
 
-        dbName=campusActivity.getBdname();
-        System.out.println(dbName);
+        activityName=campusActivity.getActivityName();
+//        System.out.println(dbName);
 
-        List<CampusActivity> campusActivities=campusActivityService.findAllActivity(dbName);
+        List<CampusActivity> campusActivities=campusActivityService.findAllActivity(activityName);
 
         return campusActivities;
     }
@@ -101,7 +105,7 @@ public class CampusActivityController {
 
 
 
-        System.out.println(dbName);
+//        System.out.println("这个是每个项目的别名"+dbName);
 
         //创建Excel
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -113,7 +117,7 @@ public class CampusActivityController {
         setTitle(workbook,sheet);
 
         //获取项目数据库的值
-        List<CampusActivity> campusActivities=campusActivityService.findAllActivity(dbName);
+        List<CampusActivity> campusActivities=campusActivityService.findAllActivity(activityName);
 
         //新增数据行，并且设置单元格数据
         int rowNum = 1;
@@ -126,11 +130,12 @@ public class CampusActivityController {
         }
 
 //        String fileName="sports.xls";
-          String fileName=dbName+".xls";
+          String fileName=activityName+".xls";
+        String downloadFileName =new String(fileName.getBytes("UTF-8"),"iso-8859-1");
         //准备将Excel的输出流通过response输出到页面下载
         //八进制输出流
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        response.setHeader("Content-disposition", "attachment;filename=" + downloadFileName);
         response.flushBuffer();
         workbook.write(response.getOutputStream());
 

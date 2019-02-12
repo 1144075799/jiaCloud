@@ -5,8 +5,6 @@ public class Item {
 
     private int code;   //请求号
 
-    private String alias;   //别名
-
     private String name;    //活动名称
 
     private String site;    //活动地点
@@ -94,6 +92,7 @@ public class Item {
     public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
+
     public int getCode() {
         return code;
     }
@@ -102,11 +101,4 @@ public class Item {
         this.code = code;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
 }

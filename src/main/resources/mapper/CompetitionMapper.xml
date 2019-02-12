@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiacloud.api.dao.CompetitionMapper">
+    <resultMap id="BaseResultMap" type="com.jiacloud.api.domain.Competition">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="time" property="time"/>
+        <result column="deadline" property="deadline"/>
+        <result column="grade" property="grade"/>
+        <result column="sponsor" property="sponsor"/>
+        <result column="presentation" property="presentation"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        name,time,deadline,grade,sponsor,presentation
+    </sql>
+
+    <!--添加竞赛-->
+    <select id="addCompetition" resultMap="BaseResultMap" parameterType="java.lang.String">
+        INSERT INTO competition (name,time,deadline,grade,sponsor,presentation) values (#{name},#{time},#{deadline},#{grade},#{sponsor},#{presentation})
+    </select>
+
+    <!--查找竞赛-->
+    <select id="findCompetition" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select time
+        from competition
+        where name=#{name}
+    </select>
+
+    <!--返回所有竞赛-->
+    <select id="findAllCompetition" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from competition
+    </select>
+
+    <!--返回竞赛到期时间-->
+    <select id="findCompetitionDeadline" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          deadline
+        from competition
+        where name=#{name}
+    </select>
+
+
+</mapper>

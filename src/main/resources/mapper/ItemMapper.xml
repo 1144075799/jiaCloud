@@ -11,16 +11,15 @@
         <result column="particulars" property="particulars"/>
         <result column="sponsor" property="sponsor"/>
         <result column="deadline" property="deadline" jdbcType="DATE"/>
-        <result column="alias" property="alias"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,site,title,time,participants,particulars,sponsor,deadline,alias
+        id,name,site,title,time,participants,particulars,sponsor,deadline
     </sql>
 
     <!--添加项目-->
     <select id="addItem" resultMap="BaseResultMap" parameterType="java.lang.String">
-        INSERT INTO activity (name,site,title,time,participants,particulars,sponsor,deadline,alias) VALUES (#{name},#{site},#{title},#{time},#{participants},#{particulars},#{sponsor},#{deadline},#{alias})
+        INSERT INTO activity (name,site,title,time,participants,particulars,sponsor,deadline) VALUES (#{name},#{site},#{title},#{time},#{participants},#{particulars},#{sponsor},#{deadline})
     </select>
 
     <!--查找项目-->
@@ -38,19 +37,23 @@
         from activity
     </select>
 
-    <!--查找活动名称-->
-    <select id="findItemName" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-          name
+    <!--&lt;!&ndash;查找活动名称&ndash;&gt;-->
+    <!--<select id="findItemName" resultMap="BaseResultMap" parameterType="java.lang.String">-->
+        <!--select-->
+          <!--name-->
+        <!--from activity-->
+        <!--where  alias = #{alias}-->
+    <!--</select>-->
+
+    <!--查找活动人数-->
+    <select id="findItemParticipants" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select participants
         from activity
-        where  alias = #{alias}
+        where name=#{name}
     </select>
 
-    <!--查找活动名称-->
-    <select id="findItemParticipants" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-          participants
-        from activity
-        where  alias = #{alias}
+    <!--添加文件-->
+    <select id="addDocName" resultMap="BaseResultMap" parameterType="java.lang.String">
+           update activity set docName=#{DocName} where name=#{name}
     </select>
 </mapper>

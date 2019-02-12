@@ -1,7 +1,9 @@
 package com.jiacloud.api.domain;
 
 public class CampusActivity {
-    private  String bdname;
+
+
+    private  String activityName;
 
     private int code;
 
@@ -35,12 +37,12 @@ public class CampusActivity {
         this.number = number;
     }
 
-    public String getBdname() {
-        return bdname;
+    public String getActivityName() {
+        return activityName;
     }
 
-    public void setBdname(String bdname) {
-        this.bdname = bdname;
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     public int getCode() {

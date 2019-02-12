@@ -12,24 +12,20 @@ public class CampusActivityServiceImpl implements CampusActivityMapper {
     @Autowired
     private CampusActivityMapper campusActivityMapper;
 
-    /**创建校园活动表**/
-    public CampusActivity setActivity(String bdname){
-        return campusActivityMapper.setActivity(bdname);
-    }
 
     /**参加校园活动**/
-    public CampusActivity joinActivity(String bdname,String classroom,String name,String number){
-        return campusActivityMapper.joinActivity(bdname,classroom,name,number);
+    public CampusActivity joinActivity(String activityName,String classroom,String name,String number){
+        return campusActivityMapper.joinActivity(activityName,classroom,name,number);
     }
 
     /**返回所有参加人的信息**/
-    public List<CampusActivity> findAllActivity(String bdname){
-        return campusActivityMapper.findAllActivity(bdname);
+    public List<CampusActivity> findAllActivity(String activityName){
+        return campusActivityMapper.findAllActivity(activityName);
     }
 
     /**统计参与人数**/
-    public Integer  countUpActivity(String bdname){
-        Integer numberOfpeople=campusActivityMapper.countUpActivity(bdname);
+    public Integer  countUpActivity(String activityName){
+        Integer numberOfpeople=campusActivityMapper.countUpActivity(activityName);
         return numberOfpeople;
     }
 }

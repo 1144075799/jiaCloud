@@ -9,34 +9,29 @@ import java.util.List;
 @Mapper
 public interface CampusActivityMapper {
 
-    /**
-     * 创建活动表
-     * @param bdname
-     * @return
-     */
-    CampusActivity setActivity(@Param(value = "bdname") String bdname);
+
 
     /**
      * 参加活动
-     * @param bdname
+     * @param activityName
      * @param classroom
      * @param name
      * @param number
      * @return
      */
-    CampusActivity joinActivity(@Param(value = "bdname") String bdname,@Param(value = "classroom") String classroom,@Param(value = "name") String name,@Param(value = "number") String number);
+    CampusActivity joinActivity(@Param(value = "activityName") String activityName,@Param(value = "classroom") String classroom,@Param(value = "name") String name,@Param(value = "number") String number);
 
     /**
      * 查询所有活动
-     * @param bdname
+     * @param activityName
      * @return
      */
-    List<CampusActivity> findAllActivity(@Param(value = "bdname") String bdname);
+    List<CampusActivity> findAllActivity(@Param(value = "activityName") String activityName);
 
     /**
      * 统计参与人数
-     * @param bdname
+     * @param activityName
      * @return
      */
-    Integer countUpActivity(@Param(value = "bdname") String bdname);
+    Integer countUpActivity(@Param(value = "activityName") String activityName);
 }

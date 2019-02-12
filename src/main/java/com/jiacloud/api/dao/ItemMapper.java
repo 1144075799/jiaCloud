@@ -18,10 +18,9 @@ public interface ItemMapper {
      * @param particulars
      * @param sponsor
      * @param deadline
-     * @param alias
      * @return
      */
-    Item addItem(@Param(value = "name") String name,@Param(value = "site") String site,@Param(value = "title") String title,@Param(value = "time") String time,@Param(value = "participants") String participants,@Param(value = "particulars") String particulars,@Param(value = "sponsor") String sponsor,@Param(value = "deadline") String deadline,@Param(value = "alias") String alias);
+    Item addItem(@Param(value = "name") String name,@Param(value = "site") String site,@Param(value = "title") String title,@Param(value = "time") String time,@Param(value = "participants") String participants,@Param(value = "particulars") String particulars,@Param(value = "sponsor") String sponsor,@Param(value = "deadline") String deadline);
 
     /***
      * 查询项目
@@ -38,18 +37,18 @@ public interface ItemMapper {
 
 
     /**
-     * 查找活动名称
-     * @param alias
+     * 查找活动预定人数
+     * @param name
      * @return
      */
-    Item findItemName(String alias);
+    Item findItemParticipants(@Param(value = "name") String name);
 
     /**
-     * 查找活动预定人数
-     * @param alias
+     * 添加文件
+     * @param DocName
      * @return
      */
-    Item findItemParticipants(String alias);
+    String addDocName(@Param(value = "DocName") String DocName,@Param(value = "name") String name);
 
 
 

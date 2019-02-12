@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiacloud.api.dao.CompetitionDetailsMapper">
+    <resultMap id="BaseResultMap" type="com.jiacloud.api.domain.CompetitionDetails">
+        <result column="competitionName" property="competitionName"/>
+        <result column="captain" property="captain"/>
+        <result column="member" property="member"/>
+        <result column="number" property="number"/>
+        <result column="telephone" property="telephone"/>
+        <result column="QQ" property="QQ"/>
+        <result column="className" property="className"/>
+        <result column="teamName" property="teamName"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <select id="joinCompetitionDetails" resultMap="BaseResultMap" parameterType="java.lang.String">
+        INSERT INTO competitionmember (captain,member,number,telephone,QQ,className,teamName,remark,competitionName) VALUES (#{captain},#{member},#{number},#{telephone},#{QQ},#{className},#{teamName},#{remark},#{competitionName})
+    </select>
+
+    <select id="findCompetitionDetails" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+          captain,member,number,telephone,QQ,className,teamName,remark
+        from competitionmember
+        where competitionName=#{competitionName}
+    </select>
+
+</mapper>
