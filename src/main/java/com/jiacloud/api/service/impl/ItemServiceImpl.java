@@ -37,6 +37,7 @@ public class ItemServiceImpl implements ItemMapper{
         return itemMapper.findItemParticipants(name);
     }
 
+    /**添加文件**/
     @Override
     public String addDocName(String DocName,String name){
         return itemMapper.addDocName(DocName,name);

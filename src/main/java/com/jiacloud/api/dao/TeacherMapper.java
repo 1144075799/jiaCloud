@@ -45,4 +45,12 @@ public interface TeacherMapper {
      */
     List<Teacher> findAllTeacher();
 
+    /**
+     * 上传图片
+     * @param ImgPath
+     * @param name
+     * @return
+     */
+    String addImagePath(@Param(value = "ImgPath") String ImgPath,@Param(value = "name") String name);
+
 }

@@ -28,4 +28,12 @@ public interface CompetitionMapper {
          * @return
          */
         Competition findCompetitionDeadline(@Param(value = "name") String name);
+
+        /**
+         * 添加文件
+         * @param DocName
+         * @param name
+         * @return
+         */
+        String addDocName(@Param(value = "DocName") String DocName,@Param(value = "name") String name);
 }

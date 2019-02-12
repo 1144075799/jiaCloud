@@ -31,4 +31,10 @@ public class CompetitionServiceImpl implements CompetitionMapper {
     public Competition findCompetitionDeadline(String name){
         return competitionMapper.findCompetitionDeadline(name);
     }
+
+    /**添加文件**/
+    @Override
+    public String addDocName(String DocName,String name){
+        return competitionMapper.addDocName(DocName,name);
+    }
 }

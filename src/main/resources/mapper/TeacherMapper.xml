@@ -7,6 +7,7 @@
         <result column="passWord" property="passWord"/>
         <result column="type" property="type"/>
         <result column="name" property="name"/>
+        <result column="imgPath" property="imgPath"/>
     </resultMap>
 
     <!--添加老师信息-->
@@ -33,7 +34,7 @@
     <!--查找基本信息-->
     <select id="findBaseTeacher" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
-          type,name
+          type,name,imgPath
         from teacher
         where userName=#{userName}
     </select>
@@ -43,5 +44,10 @@
         select
         userName,name,type
         from teacher
+    </select>
+
+    <!--上传图片-->
+    <select id="addImagePath" parameterType="java.lang.String">
+          update teacher set imgPath=#{ImgPath} where name=#{name}
     </select>
 </mapper>

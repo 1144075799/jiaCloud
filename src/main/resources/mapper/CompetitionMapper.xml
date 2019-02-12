@@ -42,5 +42,9 @@
         where name=#{name}
     </select>
 
+    <!--添加文件-->
+    <select id="addDocName" resultMap="BaseResultMap" parameterType="java.lang.String">
+           update competition set docName=#{DocName} where name=#{name}
+    </select>
 
 </mapper>

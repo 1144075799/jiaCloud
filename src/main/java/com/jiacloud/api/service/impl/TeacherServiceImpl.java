@@ -36,4 +36,9 @@ public class TeacherServiceImpl implements TeacherMapper {
     public List<Teacher> findAllTeacher(){
         return teacherMapper.findAllTeacher();
     }
+
+    @Override
+    public String addImagePath(String ImgPath,String name){
+        return teacherMapper.addImagePath(ImgPath,name);
+    }
 }
