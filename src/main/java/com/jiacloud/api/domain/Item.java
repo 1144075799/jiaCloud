@@ -5,6 +5,8 @@ public class Item {
 
     private int code;   //请求号
 
+    private String fuzzyName; //模糊查找
+
     private String name;    //活动名称
 
     private String site;    //活动地点
@@ -101,4 +103,11 @@ public class Item {
         this.code = code;
     }
 
+    public String getFuzzyName() {
+        return fuzzyName;
+    }
+
+    public void setFuzzyName(String fuzzyName) {
+        this.fuzzyName = fuzzyName;
+    }
 }

@@ -47,4 +47,14 @@
            update competition set docName=#{DocName} where name=#{name}
     </select>
 
+    <!--结束项目-->
+    <select id="deleteCompetition" resultMap="BaseResultMap" parameterType="java.lang.String">
+         DELETE FROM competition WHERE name=#{name};
+    </select>
+
+    <!--删除竞赛相关人员-->
+    <select id="deleteCompetitionMember" resultMap="BaseResultMap" parameterType="java.lang.String">
+         DELETE FROM competitionmember WHERE competitionName=#{name};
+    </select>
+
 </mapper>

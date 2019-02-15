@@ -56,4 +56,22 @@
     <select id="addDocName" resultMap="BaseResultMap" parameterType="java.lang.String">
            update activity set docName=#{DocName} where name=#{name}
     </select>
+
+    <!--模糊查找-->
+    <select id="findFuzzyItem" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from activity
+        where name like '%${fuzzyName}%'
+    </select>
+
+    <!--删除活动-->
+    <select id="deleteItem" resultMap="BaseResultMap" parameterType="java.lang.String">
+        DELETE FROM activity WHERE name=#{name};
+    </select>
+
+    <!--删除活动相关人员-->
+    <select id="deleteItemMember" resultMap="BaseResultMap" parameterType="java.lang.String">
+        DELETE FROM activitymember WHERE activityName=#{name};
+    </select>
 </mapper>

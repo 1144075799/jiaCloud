@@ -37,4 +37,16 @@ public class CompetitionServiceImpl implements CompetitionMapper {
     public String addDocName(String DocName,String name){
         return competitionMapper.addDocName(DocName,name);
     }
+
+    /**结束竞赛**/
+    @Override
+    public Competition deleteCompetition(String name){
+        return competitionMapper.deleteCompetition(name);
+    }
+
+    /**删除竞赛相关人员**/
+    @Override
+    public Competition deleteCompetitionMember(String name){
+        return competitionMapper.deleteCompetitionMember(name);
+    }
 }

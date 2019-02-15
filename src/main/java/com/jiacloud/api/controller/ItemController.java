@@ -69,13 +69,60 @@ public class ItemController {
 
         return item;
     }
-
+    /**获取活动**/
     @CrossOrigin
     @RequestMapping(value = "/getActivity",method = RequestMethod.GET)
     public List<Item> getActivity(){
         List<Item> item=itemService.findAllItem();
         return item;
     }
+
+    /**结束项目**/
+    @CrossOrigin
+    @RequestMapping(value = "/finishActivity",method = RequestMethod.POST)
+    public Item finishActivity(@RequestBody Item item){
+        /**获取前端的值**/
+        String name=item.getName();
+        System.out.println(name);
+
+        /**判断活动是否存在，若存在则删除活动**/
+        String title=null;
+        try {
+            title=itemService.findItem(name).getTitle();
+        } catch (Exception e) {
+            item.setCode(400);
+            return item;
+        }
+        itemService.deleteItem(name);
+        itemService.deleteItemMember(name);
+        item.setCode(200);
+        return item;
+    }
+
+    /**查找活动**/
+    @CrossOrigin
+    @RequestMapping(value = "/findFuzzyActivity",method = RequestMethod.POST)
+    public Item findFuzzyActivity(@RequestBody Item item){
+        /**获取前端的参数**/
+        String fuzzyName=item.getFuzzyName();
+
+
+        /**判断数据库钟是否已存在这个活动**/
+        String checkTitle=null;
+        try {
+            checkTitle=itemService.findFuzzyItem(fuzzyName).getTitle();
+        } catch (Exception e) {
+            item.setCode(400);
+            return item;
+        }
+
+        /**获取指定的项目**/
+        item=itemService.findFuzzyItem(fuzzyName);
+        item.setCode(200);
+
+        return item;
+    }
+
 
 
     @CrossOrigin

@@ -42,4 +42,22 @@ public class ItemServiceImpl implements ItemMapper{
     public String addDocName(String DocName,String name){
         return itemMapper.addDocName(DocName,name);
     }
+
+    /**模糊查找**/
+    @Override
+    public Item findFuzzyItem(String fuzzyName){
+        return itemMapper.findFuzzyItem(fuzzyName);
+    }
+
+    /**删除活动**/
+    @Override
+    public Item deleteItem(String name){
+        return itemMapper.deleteItem(name);
+    }
+
+    /**删除活动相关人员**/
+    @Override
+    public Item deleteItemMember(String name){
+        return itemMapper.deleteItemMember(name);
+    }
 }

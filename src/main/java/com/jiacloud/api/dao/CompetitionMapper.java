@@ -36,4 +36,18 @@ public interface CompetitionMapper {
          * @return
          */
         String addDocName(@Param(value = "DocName") String DocName,@Param(value = "name") String name);
+
+        /**
+         * 结束竞赛
+         * @param name
+         * @return
+         */
+        Competition deleteCompetition(@Param(value = "name") String name);
+
+        /**
+         * 删除竞赛相关人员
+         * @param name
+         * @return
+         */
+        Competition deleteCompetitionMember(@Param(value = "name") String name);
 }

@@ -50,6 +50,27 @@ public interface ItemMapper {
      */
     String addDocName(@Param(value = "DocName") String DocName,@Param(value = "name") String name);
 
+    /**
+     * 模糊查找
+     * @param fuzzyName
+     * @return
+     */
+    Item findFuzzyItem(@Param(value = "fuzzyName") String fuzzyName);
+
+
+    /**
+     * 删除活动
+     * @param name
+     * @return
+     */
+    Item deleteItem(@Param(value = "name") String name);
+
+    /**
+     * 删除活动相关人员
+     * @param name
+     * @return
+     */
+    Item deleteItemMember(@Param(value = "name") String name);
 
 
 }

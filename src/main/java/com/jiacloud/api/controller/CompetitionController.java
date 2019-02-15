@@ -66,6 +66,28 @@ public class CompetitionController {
         return competition;
     }
 
+    /**结束项目**/
+    @CrossOrigin
+    @RequestMapping(value = "/finishCompetition",method = RequestMethod.POST)
+    public Competition finishCompetition(@RequestBody Competition competition){
+        /**获取前端的值**/
+        String name=competition.getName();
+        System.out.println(name);
+
+        /**判断活动是否存在，若存在则删除活动**/
+        String time=null;
+        try {
+            time=competitionService.findCompetition(name).getTime();
+        } catch (Exception e) {
+            competition.setCode(400);
+            return competition;
+        }
+        competitionService.deleteCompetition(name);
+        competitionService.deleteCompetitionMember(name);
+        competition.setCode(200);
+        return competition;
+    }
+
     @CrossOrigin
     @RequestMapping(value = "/getCompetitions",method = RequestMethod.GET)
     public List<Competition> getCompetitions(){
