@@ -23,6 +23,8 @@ public class Item {
 
     private String deadline;    //截至时间
 
+    private String imgPath;     //图片地址
+
     public int getId() {
         return id;
     }
@@ -109,5 +111,13 @@ public class Item {
 
     public void setFuzzyName(String fuzzyName) {
         this.fuzzyName = fuzzyName;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

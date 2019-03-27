@@ -47,6 +47,11 @@
            update competition set docName=#{DocName} where name=#{name}
     </select>
 
+    <!--添加图片-->
+    <select id="addImagePath" resultMap="BaseResultMap" parameterType="java.lang.String">
+           update competition set imgPath=#{imgPath} where name=#{name}
+    </select>
+
     <!--结束项目-->
     <select id="deleteCompetition" resultMap="BaseResultMap" parameterType="java.lang.String">
          DELETE FROM competition WHERE name=#{name};

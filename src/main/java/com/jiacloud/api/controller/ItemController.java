@@ -126,9 +126,48 @@ public class ItemController {
 
 
     @CrossOrigin
+    @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
+    /**项目图片上传类**/
+    public String uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
+
+        //设置文件的保存路径
+        String path = "E:\\Spring\\data\\img\\";
+//        System.out.println(path);
+
+        //文件命名
+        String originalFilename = file.getOriginalFilename();
+        //System.out.println(originalFilename);
+        String extendName = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length());
+
+        //判断文件是否是文档
+        Map<String, String> map = new HashMap<>();
+        String[] imagType = {".jpg", ".png", ".bmp", ".gif"};
+        List<String> imageTyepLists = Arrays.asList(imagType);
+        if (imageTyepLists.contains(extendName)) {
+            File dir = new File(path, originalFilename);
+            //并接图片路径
+            String DocPath=path+originalFilename;
+            File filepath = new File(path);
+            //创建存放图片的文件夹
+            if (!filepath.exists()) {
+                filepath.mkdirs();
+            }
+            //把图片放进文件夹中
+            file.transferTo(dir);
+
+            //把文档的路径写入数据库
+            itemService.addImagePath(DocPath,name);
+
+            return "200";
+        }
+        return "400";
+    }
+
+
+    @CrossOrigin
     @RequestMapping(value = "/uploadDoc", method = RequestMethod.POST)
     /**项目文件上传类**/
-    public String uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
+    public String uploadDoc(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
 
         //设置文件的保存路径
         String path = "E:\\Spring\\data\\doc\\";

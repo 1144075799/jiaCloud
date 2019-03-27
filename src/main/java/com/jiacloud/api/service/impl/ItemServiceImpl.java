@@ -43,6 +43,12 @@ public class ItemServiceImpl implements ItemMapper{
         return itemMapper.addDocName(DocName,name);
     }
 
+    /**添加图片**/
+    @Override
+    public String addImagePath(String imgPath,String name){
+        return itemMapper.addImagePath(imgPath,name);
+    }
+
     /**模糊查找**/
     @Override
     public Item findFuzzyItem(String fuzzyName){

@@ -38,6 +38,12 @@ public class CompetitionServiceImpl implements CompetitionMapper {
         return competitionMapper.addDocName(DocName,name);
     }
 
+    /**添加图片**/
+    @Override
+    public String addImagePath(String imgPath,String name){
+        return competitionMapper.addImagePath(imgPath,name);
+    }
+
     /**结束竞赛**/
     @Override
     public Competition deleteCompetition(String name){

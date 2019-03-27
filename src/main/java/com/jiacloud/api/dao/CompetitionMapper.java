@@ -38,6 +38,14 @@ public interface CompetitionMapper {
         String addDocName(@Param(value = "DocName") String DocName,@Param(value = "name") String name);
 
         /**
+         * 添加图片
+         * @param imgPath
+         * @param name
+         * @return
+         */
+        String addImagePath(@Param(value = "imgPath") String imgPath,@Param(value = "name") String name);
+
+        /**
          * 结束竞赛
          * @param name
          * @return

@@ -11,10 +11,11 @@
         <result column="particulars" property="particulars"/>
         <result column="sponsor" property="sponsor"/>
         <result column="deadline" property="deadline" jdbcType="DATE"/>
+        <result column="imgPath" property="imgPath"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,site,title,time,participants,particulars,sponsor,deadline
+        id,name,site,title,time,participants,particulars,sponsor,deadline,imgPath
     </sql>
 
     <!--添加项目-->
@@ -55,6 +56,11 @@
     <!--添加文件-->
     <select id="addDocName" resultMap="BaseResultMap" parameterType="java.lang.String">
            update activity set docName=#{DocName} where name=#{name}
+    </select>
+
+    <!--添加图片-->
+    <select id="addImagePath" resultMap="BaseResultMap" parameterType="java.lang.String">
+           update activity set imgPath=#{imgPath} where name=#{name}
     </select>
 
     <!--模糊查找-->
